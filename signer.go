@@ -22,6 +22,9 @@ type Signer struct {
 }
 
 func NewSigner(prvHex string) (*Signer, error) {
+	if strings.HasPrefix(prvHex, "0x") {
+		prvHex = prvHex[2:]
+	}
 	k, err := crypto.HexToECDSA(prvHex)
 	if err != nil {
 		return nil, err
